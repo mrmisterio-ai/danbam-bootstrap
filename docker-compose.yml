@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  danbam:
+    build: .
+    container_name: danbam-team
+    restart: unless-stopped
+    ports:
+      - "18789:18789"  # OpenClaw Gateway
+    environment:
+      # ━━━ 필수 (둘 중 하나) ━━━
+      # 방법 1: Claude Max 구독 (OAuth 프록시)
+      - ANTHROPIC_COOKIE=${ANTHROPIC_COOKIE:-}
+      # 방법 2: Anthropic API 키
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+
+      # ━━━ 프로젝트 정보 ━━━
+      - TEAM_NAME=${TEAM_NAME:-단밤}
+      - PROJECT_NAME=${PROJECT_NAME:-새 프로젝트}
+
+      # ━━━ 선택 ━━━
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN:-}
+      - DISCORD_USER_ID=${DISCORD_USER_ID:-}
+      - DISCORD_GUILD_ID=${DISCORD_GUILD_ID:-}
+      - FIGMA_TOKEN=${FIGMA_TOKEN:-}
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - BRAVE_API_KEY=${BRAVE_API_KEY:-}
+    volumes:
+      # 프로젝트 코드 영속성
+      - danbam-projects:/home/ubuntu/projects
+      # 메모리 영속성
+      - danbam-memory:/home/ubuntu/openclaw-workspaces/manager/memory
+      # OpenClaw 세션 영속성
+      - danbam-sessions:/home/ubuntu/.openclaw/agents
+
+volumes:
+  danbam-projects:
+  danbam-memory:
+  danbam-sessions:

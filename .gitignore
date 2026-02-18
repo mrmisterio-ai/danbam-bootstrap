@@ -1,0 +1,4 @@
+.env
+cli-proxy-api/cli-proxy-api
+*.log
+node_modules/

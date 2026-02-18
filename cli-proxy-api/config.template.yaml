@@ -1,0 +1,23 @@
+host: "127.0.0.1"
+port: 3456
+
+auth-dir: "~/.cli-proxy-api"
+
+api-keys:
+  - "sk-proxy-local-00000000000000000000000000000000000000000000"
+
+debug: false
+
+request-retry: 2
+
+oauth-model-alias:
+  claude:
+    - name: "claude-opus-4-6"
+      alias: "claude-opus-4"
+      fork: true
+    - name: "claude-sonnet-4-5-20250929"
+      alias: "claude-sonnet-4"
+      fork: true
+    - name: "claude-haiku-4-5-20251001"
+      alias: "claude-haiku-4"
+      fork: true

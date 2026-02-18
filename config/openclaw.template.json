@@ -1,0 +1,131 @@
+{
+  "env": {
+    "OPENAI_API_KEY": "__OPENAI_KEY__",
+    "OPENAI_BASE_URL": "http://localhost:3456/v1",
+    "DISCORD_BOT_TOKEN": "",
+    "BRAVE_API_KEY": ""
+  },
+  "models": {
+    "providers": {
+      "claude-proxy": {
+        "baseUrl": "http://localhost:3456",
+        "apiKey": "__PROXY_KEY__",
+        "api": "__PROXY_KEY__",
+        "models": [
+          {
+            "id": "claude-opus-4-6",
+            "name": "Claude Opus 4.6",
+            "contextWindow": 200000,
+            "maxTokens": 32000
+          },
+          {
+            "id": "claude-sonnet-4-5-20250929",
+            "name": "Claude Sonnet 4.5",
+            "contextWindow": 200000,
+            "maxTokens": 32000
+          },
+          {
+            "id": "claude-haiku-4-5-20251001",
+            "name": "Claude Haiku 4.5",
+            "contextWindow": 200000,
+            "maxTokens": 32000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "claude-proxy/claude-sonnet-4-5-20250929"
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "subagents": {
+        "maxConcurrent": 4,
+        "archiveAfterMinutes": 60,
+        "model": "claude-proxy/claude-sonnet-4-5-20250929"
+      }
+    },
+    "list": [
+      {
+        "id": "manager",
+        "default": true,
+        "workspace": "/home/ubuntu/openclaw-workspaces/manager",
+        "model": {
+          "primary": "claude-proxy/claude-opus-4-6"
+        },
+        "subagents": {
+          "allowAgents": [
+            "server-dev",
+            "frontend-dev",
+            "uiux-designer"
+          ],
+          "model": "claude-proxy/claude-sonnet-4-5-20250929"
+        }
+      },
+      {
+        "id": "server-dev",
+        "workspace": "/home/ubuntu/openclaw-workspaces/server-dev",
+        "model": {
+          "primary": "claude-proxy/claude-sonnet-4-5-20250929"
+        }
+      },
+      {
+        "id": "frontend-dev",
+        "workspace": "/home/ubuntu/openclaw-workspaces/frontend-dev",
+        "model": {
+          "primary": "claude-proxy/claude-sonnet-4-5-20250929"
+        }
+      },
+      {
+        "id": "uiux-designer",
+        "workspace": "/home/ubuntu/openclaw-workspaces/uiux-designer",
+        "model": {
+          "primary": "claude-proxy/claude-sonnet-4-5-20250929"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true
+    },
+    "exec": {
+      "security": "full",
+      "ask": "off"
+    }
+  },
+  "messages": {
+    "ackReactionScope": "all"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true
+  },
+  "channels": {
+    "discord": {
+      "enabled": false,
+      "token": "",
+      "groupPolicy": "allowlist",
+      "dmPolicy": "allowlist",
+      "allowFrom": [],
+      "guilds": {}
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "open"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "discord": {
+        "enabled": false
+      }
+    }
+  }
+}
