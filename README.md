@@ -11,31 +11,39 @@ AI 에이전트 4명으로 구성된 개발팀을 Docker 한 방으로 셋업합
 | ✨ 프론트엔드 개발자 | Sonnet 4.5 | UI, 컴포넌트, 빌드 |
 | 🎨 UI/UX 디자이너 | Sonnet 4.5 | 디자인, 프로토타입 |
 
-## 빠른 시작
+## 빠른 시작 (원클릭)
 
-### 1. 복제
+빈 Ubuntu EC2 인스턴스에서 이것만 실행하세요:
+
+```bash
+curl -sL https://raw.githubusercontent.com/mrmisterio-ai/danbam-bootstrap/main/install.sh | bash
+```
+
+스크립트가 자동으로:
+1. 시스템 패키지 설치 (curl, git, jq...)
+2. Docker + Docker Compose 설치
+3. 리포지토리 다운로드
+4. 프로젝트 정보 입력 (팀 이름, 프로젝트명)
+5. 인증 토큰 입력 (Claude, Discord, Figma 등)
+6. `.env` 파일 생성
+7. Docker 빌드 & 실행
+
+### 수동 설치
+
 ```bash
 git clone https://github.com/mrmisterio-ai/danbam-bootstrap.git
 cd danbam-bootstrap
-```
-
-### 2. 환경변수 설정
-```bash
 cp .env.example .env
 vi .env  # 토큰 입력
+docker compose up -d --build
 ```
 
-### 3. 실행
+### 접속
 ```bash
-docker-compose up -d
-```
+# 로그 확인
+docker logs -f danbam-team
 
-### 4. 접속
-```bash
-# 웹 대시보드
-open http://localhost:18789
-
-# 또는 CLI
+# CLI로 매니저와 대화
 docker exec -it danbam-team openclaw chat manager
 ```
 
