@@ -11,6 +11,11 @@
 #
 set -e
 
+# stdin을 터미널에 연결 (curl | bash 에서도 사용자 입력 가능하게)
+if [ ! -t 0 ]; then
+    exec < /dev/tty
+fi
+
 # 색상
 RED='\033[0;31m'
 GREEN='\033[0;32m'
