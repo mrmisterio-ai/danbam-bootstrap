@@ -4,16 +4,13 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #
 # 사용법: 빈 Ubuntu EC2에서
-#   curl -sL https://raw.githubusercontent.com/mrmisterio-ai/danbam-bootstrap/main/install.sh | bash
-#
-# 또는:
-#   wget -qO- https://raw.githubusercontent.com/mrmisterio-ai/danbam-bootstrap/main/install.sh | bash
+#   curl -sLO https://raw.githubusercontent.com/mrmisterio-ai/danbam-bootstrap/main/install.sh && bash install.sh
 #
 set -e
 
 # stdin을 터미널에 연결 (curl | bash 에서도 사용자 입력 가능하게)
 if [ ! -t 0 ]; then
-    exec < /dev/tty
+    exec < /dev/tty || { echo "터미널 입력을 열 수 없습니다. 다음으로 실행하세요:"; echo "  curl -sLO https://raw.githubusercontent.com/mrmisterio-ai/danbam-bootstrap/main/install.sh && bash install.sh"; exit 1; }
 fi
 
 # 색상
