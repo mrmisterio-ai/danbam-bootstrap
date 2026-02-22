@@ -158,8 +158,8 @@ else:
 
 ## API Keys
 ```bash
-FREE_KEY="AIzaSyB2kUIBrkW4pKYq868USGbkdZI26jv1j6s"
-PAID_KEY="AIzaSyBbx45pSjavkzHJWp9WulBuzFOALqftBVY"
+FREE_KEY="${GEMINI_FREE_KEY}"
+PAID_KEY="${GEMINI_PAID_KEY}"
 ```
 
 ## 합격 기준

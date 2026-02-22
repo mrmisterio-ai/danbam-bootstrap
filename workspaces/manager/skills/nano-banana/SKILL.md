@@ -22,9 +22,9 @@ description: Generate images using Google Gemini Native Image Generation (Nano B
 ## API Keys
 ```bash
 # 무료 (결제 미설정)
-FREE_KEY="AIzaSyB2kUIBrkW4pKYq868USGbkdZI26jv1j6s"
+FREE_KEY="${GEMINI_FREE_KEY}"  # 환경변수에서 로드
 # 유료 (Tier 1, pay-as-you-go)
-PAID_KEY="AIzaSyBbx45pSjavkzHJWp9WulBuzFOALqftBVY"
+PAID_KEY="${GEMINI_PAID_KEY}"  # 환경변수에서 로드
 ```
 
 ## API 호출 방법
