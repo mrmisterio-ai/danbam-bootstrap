@@ -37,6 +37,7 @@ description: |
 ### 현재 사용 가능 ✅
 | 도구 | 용도 | API | 비용 |
 |------|------|-----|------|
+| **Google Stitch** | UI 디자인 초안 생성 | 웹 (stitch.withgoogle.com) | **무료** (Standard 350회/월, Experimental 50회/월) |
 | **나노바나나** | 초안/시안 생성 | Gemini 2.5 Flash Image | ~$0.03/장 |
 | **나노바나나 Pro** | 최종 에셋, 텍스트, 4K | Gemini 3 Pro Image | ~$0.13(2K), $0.24(4K) |
 | **Gemini Vision** | 생성물 비평/검수 | 같은 Gemini API | 텍스트 토큰 비용만 |
@@ -53,6 +54,41 @@ description: |
 |------|------|------|
 | Magnific AI | 초고화질 업스케일링 | MVP 이후 |
 | Flux ControlNet | 구도 정밀 제어 | MVP 이후 |
+
+## Google Stitch 활용 프로세스
+
+### UI 디자인 초안 생성 (비용 ₩0)
+```
+1. stitch.withgoogle.com 접속 (사장님 Google 계정)
+2. 프롬프트 입력 또는 레퍼런스 이미지 업로드
+3. 생성된 UI 변형 중 최적안 선택
+4. HTML/CSS 코드 내보내기 or Figma로 복사
+5. 토니가 우리 디자인 시스템에 맞게 조정 → STYLE-SPEC 작성
+6. 현이가 React + shadcn/ui + Motion으로 구현
+```
+
+### Stitch 모드 선택 기준
+| 상황 | 모드 | 이유 |
+|------|------|------|
+| 빠르게 여러 변형 탐색 | Standard (Flash) | 350회/월, 빠른 생성 |
+| 고퀄 최종 디자인 | Experimental (Pro) | 50회/월, 이미지 입력 가능 |
+| SI 외주 목업 | Standard | 클라이언트 미팅 전 빠른 생성 |
+| 레퍼런스 기반 변형 | Experimental | 스크린샷 업로드 → 우리 스타일로 변환 |
+
+### Stitch 프롬프트 템플릿
+```
+Design a [앱 유형] for [플랫폼] that includes:
+- [화면 1: 주요 컴포넌트]
+- [화면 2: 주요 컴포넌트]
+- Style: [다크 테마/라이트 테마, 색상, 느낌]
+- Target: [대상 사용자]
+```
+
+### 제약사항
+- API 없음 — 웹 UI에서만 사용 (에이전트 자동화 불가)
+- 사장님이 직접 생성하거나, 토니 태스크에 "Stitch 참고" 지시로 활용
+- 에이전트가 직접 접근 불가 → 사장님이 생성 후 스크린샷/코드를 공유하는 방식
+- 프로덕션 퀄리티까지는 수작업 필요 — 초안/영감 도구로 활용
 
 ## 핵심 프로세스: Vision + Generation 피드백 루프
 

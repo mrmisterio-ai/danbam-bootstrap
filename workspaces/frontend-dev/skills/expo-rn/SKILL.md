@@ -128,7 +128,7 @@ sed -i 's/<script src/<script type="module" src/' dist/index.html
 ```typescript
 // 웹에서 외부 이미지 URL 사용 시
 const getChampionImage = (name: string) => {
-  const API_BASE = 'http://3.38.240.35:3000';
+  const API_BASE = 'http://YOUR_SERVER_IP:3000';
   return `${API_BASE}/images/champions/tft16_${name.toLowerCase()}.png`;
 };
 ```

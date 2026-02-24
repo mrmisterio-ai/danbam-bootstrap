@@ -162,8 +162,21 @@ curl -s -o /dev/null -w "%{http_code}" http://[서버IP]:3000/api/docs
 ```
 404 하나라도 나오면 배포 실패 — 즉시 롤백 또는 수정.
 
+### 정적 파일 배포 체크리스트 (디자인/HTML 배포 시)
+```bash
+# 디렉토리에 index.html 존재 확인 (필수)
+ssh 서버 "ls [배포경로]/index.html" || echo "❌ index.html 없음 — 생성 필수"
+
+# 모든 HTML 파일 접근 확인
+for f in $(ssh 서버 "ls [배포경로]/*.html"); do
+  curl -s -o /dev/null -w "%{http_code} $f\n" http://[서버]:3000/[경로]/$(basename $f)
+done
+```
+**index.html 없이 디렉토리 배포하면 404.** 토니가 안 만들었으면 이서가 직접 생성.
+
 ## ⚠️ 이서의 실수 기록 — 반복 금지
 - 승권이가 "완료"라고 해서 그냥 사장님한테 보고 → 필드명 틀려서 프론트 깨짐
 - 빌드 확인 안 하고 배포 → 화이트 스크린
 - 디자인 검수 없이 "현이 완료" 보고 → 사장님 피드백 5건
 - **rsync로 서버 코드 덮어쓰면서 SPA fallback/Health/Swagger/Static serving 삭제** → 사장님이 404 에러 발견 (2026-02-18)
+- **디자인 디렉토리에 index.html 없이 배포** → /design/v5/ 접근 시 404 → 사장님이 발견 (2026-02-20)

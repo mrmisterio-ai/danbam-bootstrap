@@ -10,11 +10,16 @@ This skill guides creation of distinctive, production-grade frontend interfaces 
 
 Before coding, understand the context and commit to a BOLD aesthetic direction:
 - **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: For TFT Agent — refined gaming luxury. Dark, immersive, premium feel. Like a high-end esports dashboard meets luxury mobile app.
+- **Tone**: Pick an extreme aligned with the project. For TFT Agent → refined gaming luxury. For SI 외주 → client brand에 맞는 톤. For 대시보드 → developer-centric, data-dense.
+  - Possible directions: brutally minimal, maximalist, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco, soft/pastel, industrial — 매번 다른 방향을 시도하라.
 - **Constraints**: Technical requirements (framework, performance, accessibility).
 - **Differentiation**: What makes this UNFORGETTABLE? What's the one thing someone will remember?
 
 **CRITICAL**: Choose a clear conceptual direction and execute it with precision. The key is intentionality, not intensity.
+
+**VARIETY**: No two projects should look the same. Vary themes, fonts, color palettes, layout strategies. NEVER converge on the same visual identity across different projects. Each project deserves its own personality.
+
+**MATCH COMPLEXITY TO VISION**: Maximalist designs need elaborate code with extensive animations and effects. Minimalist designs need restraint, precision, and careful attention to spacing and subtle details. Elegance = executing the vision well.
 
 ## Frontend Aesthetics Guidelines
 

@@ -8,11 +8,8 @@ services:
     ports:
       - "18789:18789"  # OpenClaw Gateway
     environment:
-      # ━━━ 필수 (둘 중 하나) ━━━
-      # 방법 1: Claude Max 구독 (OAuth 프록시)
-      - ANTHROPIC_COOKIE=${ANTHROPIC_COOKIE:-}
-      # 방법 2: Anthropic API 키
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      # ━━━ 필수 ━━━
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
 
       # ━━━ 프로젝트 정보 ━━━
       - TEAM_NAME=${TEAM_NAME:-단밤}

@@ -10,19 +10,12 @@ description: |
 
 ## 서버 정보
 
-### TFT Agent 백엔드
-- IP: `3.38.240.35`
-- SSH: `ssh ubuntu@3.38.240.35`
-- PM2 프로세스: `tft-agent-api`
+### 백엔드 서버
+- IP: `YOUR_SERVER_IP`
+- SSH: `ssh ubuntu@YOUR_SERVER_IP`
+- PM2 프로세스: `your-api-name`
 - 포트: 3000
-- 프레임워크: Fastify
-- 디렉토리: `/home/ubuntu/tft-agent-backend/`
-
-### 대시보드 백엔드
-- IP: `3.37.8.223`
-- PM2 프로세스: `danbam-api`
-- 포트: 3000
-- 프레임워크: Express v5
+- 프레임워크: Fastify / Express
 - 디렉토리: `/home/ubuntu/projects/backend/`
 
 ## PM2 운영
@@ -30,16 +23,16 @@ description: |
 ### 기본 명령어
 ```bash
 pm2 status                          # 전체 상태
-pm2 logs tft-agent-api --lines 50   # 최근 로그
-pm2 restart tft-agent-api           # 재시작
-pm2 restart tft-agent-api --update-env  # 환경변수 갱신 후 재시작
+pm2 logs your-api-name --lines 50   # 최근 로그
+pm2 restart your-api-name           # 재시작
+pm2 restart your-api-name --update-env  # 환경변수 갱신 후 재시작
 pm2 monit                           # 실시간 모니터링
 ```
 
 ### 배포 후 검증
 ```bash
 # 1. 재시작
-pm2 restart tft-agent-api --update-env
+pm2 restart your-api-name --update-env
 
 # 2. 상태 확인 (online인지)
 sleep 3 && pm2 status
@@ -48,13 +41,13 @@ sleep 3 && pm2 status
 curl -s http://localhost:3000/api/health
 
 # 4. 주요 API 확인
-curl -s http://localhost:3000/api/meta/comps | head -1
+curl -s http://localhost:3000/api/your-endpoint | head -1
 ```
 
 ### 크래시 대응
 ```bash
 # PM2 로그에서 에러 확인
-pm2 logs tft-agent-api --lines 100 --err
+pm2 logs your-api-name --lines 100 --err
 
 # 재시작 횟수 확인 (↺ 컬럼)
 pm2 status
@@ -70,21 +63,21 @@ pm2 status
 # ✅ 올바른 방법
 PORT=3000
 HOST=0.0.0.0
-RIOT_API_KEY=RGAPI-xxxxx
+API_KEY=your-api-key-here
 NODE_ENV=production
 
 # ❌ 절대 금지
 # HOST=localhost            ← 외부 접근 불가
-# RIOT_API_KEY=하드코딩     ← 코드에 직접 넣지 말 것
+# API_KEY=하드코딩          ← 코드에 직접 넣지 말 것
 ```
 
 ### 환경변수 확인
 ```bash
 # 서버에서 현재 환경변수 확인
-cat /home/ubuntu/tft-agent-backend/.env
+cat /home/ubuntu/projects/backend/.env
 
 # PM2에 반영된 환경변수 확인
-pm2 env tft-agent-api | grep -E "PORT|HOST|NODE_ENV|RIOT"
+pm2 env your-api-name | grep -E "PORT|HOST|NODE_ENV|API"
 ```
 
 ## 배포 체크리스트

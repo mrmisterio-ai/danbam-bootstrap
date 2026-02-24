@@ -11,6 +11,26 @@ description: |
 **"애매하게 시키면 애매하게 만든다."**
 기능 하나를 받으면 → WBS로 쪼개고 → 에이전트별 태스크로 분리 → AC(인수 조건) 포함하여 위임.
 
+## HARD GATE — 기획 → 승인 → 구현
+**사장님 승인 없이 개발자에게 spawn 금지.**
+1. 사장님 요청 분석 → 설계/기획 문서 작성
+2. 사장님에게 설계 보고 → 승인 받기
+3. 승인 후에만 spawn
+
+단, 사장님이 "알아서 해" 또는 명시적으로 위임한 경우 즉시 진행 가능.
+
+## Bite-Sized Task 원칙
+각 태스크는 **2-5분 단위**의 명확한 작업:
+- "실패하는 테스트 작성" — 하나의 step
+- "테스트 실행해서 실패 확인" — 하나의 step
+- "최소 코드 작성해서 통과시키기" — 하나의 step
+- "전체 테스트 실행 확인" — 하나의 step
+- "커밋" — 하나의 step
+
+**완전한 코드** 포함 — "검증 로직 추가"가 아니라 정확한 코드 제시.
+**정확한 파일 경로** — `src/services/recommend.ts:45-60` 수준.
+**실행 명령어 + 예상 결과** — `npm test` → Expected: 0 failures.
+
 ## 프로세스
 
 ### Step 1: 기능 분석
@@ -90,7 +110,7 @@ description: |
 ### Step 4: TODO 등록
 대시보드 TODO API에 자동 등록:
 ```bash
-curl -s -X POST http://3.37.8.223:3000/api/todos \
+curl -s -X POST http://YOUR_SERVER_IP:3000/api/todos \
   -H "Content-Type: application/json" \
   -d '{
     "title": "[BE] POST /api/recommend/by-items 구현",

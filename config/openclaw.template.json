@@ -1,43 +1,20 @@
 {
   "env": {
     "OPENAI_API_KEY": "__OPENAI_KEY__",
-    "OPENAI_BASE_URL": "http://localhost:3456/v1",
     "DISCORD_BOT_TOKEN": "",
     "BRAVE_API_KEY": ""
   },
   "models": {
     "providers": {
-      "claude-proxy": {
-        "baseUrl": "http://localhost:3456",
-        "apiKey": "__PROXY_KEY__",
-        "api": "__PROXY_KEY__",
-        "models": [
-          {
-            "id": "claude-opus-4-6",
-            "name": "Claude Opus 4.6",
-            "contextWindow": 200000,
-            "maxTokens": 32000
-          },
-          {
-            "id": "claude-sonnet-4-5-20250929",
-            "name": "Claude Sonnet 4.5",
-            "contextWindow": 200000,
-            "maxTokens": 32000
-          },
-          {
-            "id": "claude-haiku-4-5-20251001",
-            "name": "Claude Haiku 4.5",
-            "contextWindow": 200000,
-            "maxTokens": 32000
-          }
-        ]
+      "openai": {
+        "apiKey": "__OPENAI_KEY__"
       }
     }
   },
   "agents": {
     "defaults": {
       "model": {
-        "primary": "claude-proxy/claude-sonnet-4-5-20250929"
+        "primary": "openai/gpt-4o-mini"
       },
       "compaction": {
         "mode": "safeguard"
@@ -45,7 +22,7 @@
       "subagents": {
         "maxConcurrent": 4,
         "archiveAfterMinutes": 60,
-        "model": "claude-proxy/claude-sonnet-4-5-20250929"
+        "model": "openai/gpt-4o-mini"
       }
     },
     "list": [
@@ -54,36 +31,52 @@
         "default": true,
         "workspace": "/home/ubuntu/openclaw-workspaces/manager",
         "model": {
-          "primary": "claude-proxy/claude-opus-4-6"
+          "primary": "openai/gpt-4o"
         },
         "subagents": {
           "allowAgents": [
             "server-dev",
             "frontend-dev",
-            "uiux-designer"
+            "uiux-designer",
+            "researcher",
+            "design-critic"
           ],
-          "model": "claude-proxy/claude-sonnet-4-5-20250929"
+          "model": "openai/gpt-4o-mini"
         }
       },
       {
         "id": "server-dev",
         "workspace": "/home/ubuntu/openclaw-workspaces/server-dev",
         "model": {
-          "primary": "claude-proxy/claude-sonnet-4-5-20250929"
+          "primary": "openai/gpt-4o-mini"
         }
       },
       {
         "id": "frontend-dev",
         "workspace": "/home/ubuntu/openclaw-workspaces/frontend-dev",
         "model": {
-          "primary": "claude-proxy/claude-sonnet-4-5-20250929"
+          "primary": "openai/gpt-4o-mini"
         }
       },
       {
         "id": "uiux-designer",
         "workspace": "/home/ubuntu/openclaw-workspaces/uiux-designer",
         "model": {
-          "primary": "claude-proxy/claude-sonnet-4-5-20250929"
+          "primary": "openai/gpt-4o-mini"
+        }
+      },
+      {
+        "id": "researcher",
+        "workspace": "/home/ubuntu/openclaw-workspaces/researcher",
+        "model": {
+          "primary": "openai/gpt-4o-mini"
+        }
+      },
+      {
+        "id": "design-critic",
+        "workspace": "/home/ubuntu/openclaw-workspaces/design-critic",
+        "model": {
+          "primary": "openai/gpt-4o-mini"
         }
       }
     ]

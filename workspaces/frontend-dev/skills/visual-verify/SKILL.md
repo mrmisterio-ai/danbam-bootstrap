@@ -25,7 +25,7 @@ npx expo export --platform web
 sed -i 's/<script src/<script type="module" src/' dist/index.html
 
 # TFT 서버에 배포
-scp -r dist/* ubuntu@3.38.240.35:/home/ubuntu/tft-agent-backend/public/app/
+scp -r dist/* ubuntu@YOUR_SERVER_IP:/home/ubuntu/tft-agent-backend/public/app/
 ```
 
 ### Step 2: Playwright 스크린샷 캡처
@@ -34,7 +34,7 @@ scp -r dist/* ubuntu@3.38.240.35:/home/ubuntu/tft-agent-backend/public/app/
 npx playwright screenshot \
   --viewport-size="430,932" \
   --full-page \
-  "http://3.38.240.35:3000/app/" \
+  "http://YOUR_SERVER_IP:3000/app/" \
   /tmp/app-screenshot.png
 ```
 
@@ -45,7 +45,7 @@ v4 디자인 프로토타입과 실제 구현 비교:
 npx playwright screenshot \
   --viewport-size="430,932" \
   --full-page \
-  "http://3.38.240.35:3000/design/v4/home.html" \
+  "http://YOUR_SERVER_IP:3000/design/v4/home.html" \
   /tmp/design-screenshot.png
 ```
 

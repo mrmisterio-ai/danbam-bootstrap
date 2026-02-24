@@ -1,6 +1,6 @@
 #!/bin/bash
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌰 단밤 AI 개발팀 — 원클릭 설치 스크립트
+# 🌰 단밤 AI 개발팀 — 원클릭 설치 스크립트 v2.0 (ChatGPT)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #
 # 사용법: 빈 Ubuntu EC2에서
@@ -29,11 +29,12 @@ INSTALL_DIR="$HOME/danbam-bootstrap"
 clear
 echo ""
 echo -e "${BOLD}🌰 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${BOLD}   단밤 AI 개발팀 — 원클릭 설치${NC}"
+echo -e "${BOLD}   단밤 AI 개발팀 — 원클릭 설치 v2.0${NC}"
 echo -e "${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
-echo -e "  AI 에이전트 4명으로 구성된 개발팀을 설치합니다."
-echo -e "  🔥 매니저 (Opus) + 💪 백엔드 + ✨ 프론트 + 🎨 디자이너"
+echo -e "  AI 에이전트 6명으로 구성된 개발팀을 설치합니다."
+echo -e "  🔥 매니저 (GPT-4o)"
+echo -e "  💪 백엔드 + ✨ 프론트 + 🎨 디자이너 + 🔍 리서처 + 🎯 크리틱 (GPT-4o-mini)"
 echo ""
 echo -e "${YELLOW}  소요 시간: 약 5~10분${NC}"
 echo ""
@@ -126,36 +127,16 @@ echo -e "  📋 프로젝트: ${BOLD}$PROJECT_NAME${NC}"
 echo ""
 echo -e "${CYAN}[5/7] 인증 토큰 입력${NC}"
 echo ""
-echo -e "  Claude 인증이 필요합니다. 두 가지 방법 중 선택하세요:"
-echo ""
-echo -e "  ${BOLD}1)${NC} Claude Max 구독 (OAuth cookie)"
-echo -e "     → claude.ai 로그인 → DevTools → Cookies → sessionKey 복사"
-echo ""
-echo -e "  ${BOLD}2)${NC} Anthropic API 키"
-echo -e "     → console.anthropic.com/settings/keys"
+echo -e "  ${BOLD}OpenAI API 키가 필요합니다${NC}"
+echo -e "  → ${BLUE}https://platform.openai.com/api-keys${NC}"
 echo ""
 
-read -p "  방법 선택 (1 또는 2): " AUTH_METHOD
-AUTH_METHOD=${AUTH_METHOD:-1}
-
-if [ "$AUTH_METHOD" = "1" ]; then
-    echo ""
-    read -p "  Claude sessionKey (sk-ant-sid01-...): " ANTHROPIC_COOKIE
-    if [ -z "$ANTHROPIC_COOKIE" ]; then
-        echo -e "  ${RED}❌ sessionKey가 필요합니다.${NC}"
-        exit 1
-    fi
-    ANTHROPIC_API_KEY=""
-else
-    echo ""
-    read -p "  Anthropic API 키 (sk-ant-api03-...): " ANTHROPIC_API_KEY
-    if [ -z "$ANTHROPIC_API_KEY" ]; then
-        echo -e "  ${RED}❌ API 키가 필요합니다.${NC}"
-        exit 1
-    fi
-    ANTHROPIC_COOKIE=""
+read -p "  OpenAI API 키 (sk-proj-...): " OPENAI_API_KEY
+if [ -z "$OPENAI_API_KEY" ]; then
+    echo -e "  ${RED}❌ OpenAI API 키가 필요합니다.${NC}"
+    exit 1
 fi
-echo -e "  ${GREEN}✅ Claude 인증 설정 완료${NC}"
+echo -e "  ${GREEN}✅ OpenAI 인증 설정 완료${NC}"
 
 # 선택 토큰들
 echo ""
@@ -182,8 +163,7 @@ cat > "$INSTALL_DIR/.env" << ENVEOF
 # 자동 생성됨 — $(date)
 TEAM_NAME=$TEAM_NAME
 PROJECT_NAME=$PROJECT_NAME
-ANTHROPIC_COOKIE=$ANTHROPIC_COOKIE
-ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY
+OPENAI_API_KEY=$OPENAI_API_KEY
 DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
 DISCORD_USER_ID=${DISCORD_USER_ID:-}
 DISCORD_GUILD_ID=${DISCORD_GUILD_ID:-}

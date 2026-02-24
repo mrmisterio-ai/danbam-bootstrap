@@ -38,21 +38,16 @@ RUN useradd -m -s /bin/bash ubuntu \
 USER ubuntu
 WORKDIR /home/ubuntu
 
-# cli-proxy-api 디렉토리 구조
-RUN mkdir -p /home/ubuntu/cli-proxy-api \
-    /home/ubuntu/.cli-proxy-api \
-    /home/ubuntu/.openclaw \
+# 디렉토리 구조
+RUN mkdir -p /home/ubuntu/.openclaw \
     /home/ubuntu/openclaw-workspaces/manager/skills \
     /home/ubuntu/openclaw-workspaces/manager/memory \
     /home/ubuntu/openclaw-workspaces/server-dev/skills \
     /home/ubuntu/openclaw-workspaces/frontend-dev/skills \
     /home/ubuntu/openclaw-workspaces/uiux-designer/skills \
+    /home/ubuntu/openclaw-workspaces/researcher/skills \
+    /home/ubuntu/openclaw-workspaces/design-critic/skills \
     /home/ubuntu/projects
-
-# cli-proxy-api 바이너리 복사
-COPY --chown=ubuntu:ubuntu cli-proxy-api/cli-proxy-api /home/ubuntu/cli-proxy-api/cli-proxy-api
-COPY --chown=ubuntu:ubuntu cli-proxy-api/config.template.yaml /home/ubuntu/cli-proxy-api/config.template.yaml
-RUN chmod +x /home/ubuntu/cli-proxy-api/cli-proxy-api
 
 # OpenClaw 설정 템플릿
 COPY --chown=ubuntu:ubuntu config/openclaw.template.json /home/ubuntu/.openclaw/openclaw.template.json
@@ -66,6 +61,6 @@ COPY --chown=ubuntu:ubuntu scripts/setup.sh /home/ubuntu/setup.sh
 RUN chmod +x /home/ubuntu/entrypoint.sh /home/ubuntu/setup.sh
 
 # 포트
-EXPOSE 18789 3456
+EXPOSE 18789
 
 ENTRYPOINT ["/home/ubuntu/entrypoint.sh"]
